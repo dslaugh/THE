@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Modal from './ui/Modal';
+import React from 'react';
 
 type SettingsModalProps = {
   handleColorSelect: (hexcolor: string) => void;
@@ -44,7 +45,8 @@ export default function SettingsModal({
             {colorPickers.map((picker) => (
               <button
                 key={picker.color}
-                className={`color-picker h-12 w-12 rounded-full border-4 border-transparent bg-[${picker.color}] ${
+                style={{ backgroundColor: picker.color }}
+                className={`color-picker h-12 w-12 rounded-full border-4 border-transparent ${
                   selectedColor === picker.color ? 'ring-4 ring-white' : ''
                 }`}
                 data-color={picker.color}

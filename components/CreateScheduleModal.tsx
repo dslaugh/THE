@@ -2,7 +2,7 @@ export default function CreateScheduleModal() {
   return (
     <div
       id="create-schedule-modal"
-      className="fixed inset-0 modal-backdrop flex items-center justify-center p-4 hidden"
+      className="fixed inset-0 modal-backdrop flex items-center justify-center p-4"
     >
       <div className="bg-gray-800 border-2 border-[var(--neon-color)] neon-box rounded-lg p-8 w-full max-w-3xl max-h-[90vh] flex flex-col">
         <h2 className="text-3xl font-orbitron mb-6 text-center neon-text">
@@ -39,7 +39,6 @@ export default function CreateScheduleModal() {
               id="small-blind"
               value="25"
               min="0"
-              step="25"
               className="w-full bg-gray-900 p-3 rounded-lg border border-[var(--neon-color)] focus:outline-none focus:ring-2 focus:ring-[var(--neon-color)]"
             />
           </div>
@@ -55,7 +54,6 @@ export default function CreateScheduleModal() {
               id="big-blind"
               value="50"
               min="0"
-              step="25"
               className="w-full bg-gray-900 p-3 rounded-lg border border-[var(--neon-color)] focus:outline-none focus:ring-2 focus:ring-[var(--neon-color)]"
             />
           </div>

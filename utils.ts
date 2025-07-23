@@ -21,6 +21,17 @@ export const testSchedule = [
   { round: 2, smallBlind: 50, bigBlind: 100, duration: 20 },
 ];
 
+export const schedules = [
+  {
+    name: 'Test',
+    schedule: testSchedule,
+  },
+  {
+    name: 'Default',
+    schedule: defaultSchedule,
+  },
+];
+
 export function convertSecondsToMinutesAndSeconds(seconds: number) {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
