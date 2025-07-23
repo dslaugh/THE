@@ -183,6 +183,15 @@ export default function Tournament({
     setShowSettingsModal(false);
   }
 
+  function changeCurrentSchedule(name: string) {
+    const newSchedule = schedules.find((schedule) => schedule.name === name);
+    if (!newSchedule) {
+      console.error(`Schedule ${name} not found`);
+      return;
+    }
+    setCurrentSchedule(newSchedule.schedule);
+  }
+
   return (
     <div id="app" className="w-full max-w-5xl mx-auto">
       <header className="text-center mb-6">
@@ -227,6 +236,7 @@ export default function Tournament({
         )}
         {showViewSchedulesModal && (
           <ViewSchedulesModal
+            handleChangeSchedule={changeCurrentSchedule}
             handleCloseModal={() => setShowViewSchedulesModal(false)}
             schedules={schedules}
           />
