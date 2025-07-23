@@ -1,24 +1,24 @@
 import { ScheduleItem } from '../types';
 import { formatTime } from '../utils';
+import Modal from './ui/Modal';
 
 type ScheduleModalProps = {
   currentRoundIndex: number;
   currentSchedule: ScheduleItem[];
   handleCloseModal: () => void;
+  handleViewSchedulesClick: () => void;
 };
 
 export default function ScheduleModal({
   currentRoundIndex,
   currentSchedule,
   handleCloseModal,
+  handleViewSchedulesClick,
 }: ScheduleModalProps) {
   const currentRound = currentSchedule[currentRoundIndex];
 
   return (
-    <div
-      id="schedule-modal"
-      className="fixed inset-0 modal-backdrop flex items-center justify-center p-4"
-    >
+    <Modal handleClose={handleCloseModal}>
       <div className="bg-gray-800 border-2 border-[var(--neon-color)] neon-box rounded-lg p-8 w-full max-w-2xl max-h-[80vh] flex flex-col">
         <h2 className="text-3xl font-orbitron mb-6 text-center neon-text">
           Rounds Schedule
@@ -39,6 +39,7 @@ export default function ScheduleModal({
           <button
             id="new-schedule-btn"
             className="neon-button bg-blue-600 text-white font-bold py-2 px-4 rounded-lg text-md uppercase"
+            onClick={handleViewSchedulesClick}
           >
             View Schedules
           </button>
@@ -57,7 +58,7 @@ export default function ScheduleModal({
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 

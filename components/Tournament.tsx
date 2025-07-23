@@ -8,6 +8,7 @@ import { convertSecondsToMinutesAndSeconds, playSound } from '../utils';
 import { Schedule, ScheduleItem } from '../types';
 import NeonButton from './ui/NeonButton';
 import ScheduleModal from './ScheduleModal';
+import ViewSchedulesModal from './ViewSchedulesModal';
 type TournamentProps = {
   schedules: Schedule[];
   startingScheduleIndex: number;
@@ -35,6 +36,7 @@ export default function Tournament({
   const [tournamentOver, setTournamentOver] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [showViewSchedulesModal, setShowViewSchedulesModal] = useState(false);
   const [currentColor, setCurrentColor] = useState('#A020F0');
 
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -220,6 +222,13 @@ export default function Tournament({
             currentRoundIndex={currentRoundIndex}
             currentSchedule={currentSchedule}
             handleCloseModal={() => setShowScheduleModal(false)}
+            handleViewSchedulesClick={() => setShowViewSchedulesModal(true)}
+          />
+        )}
+        {showViewSchedulesModal && (
+          <ViewSchedulesModal
+            handleCloseModal={() => setShowViewSchedulesModal(false)}
+            schedules={schedules}
           />
         )}
       </main>

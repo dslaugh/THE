@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import Modal from './ui/Modal';
-import React from 'react';
 
 type SettingsModalProps = {
   handleColorSelect: (hexcolor: string) => void;
@@ -17,7 +16,7 @@ export default function SettingsModal({
     currentColor ?? '#A020F0'
   );
 
-  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleClick(e: MouseEvent<HTMLButtonElement>) {
     const thisPicker = e.currentTarget;
     const color = thisPicker.dataset.color ?? '#A020F0';
 
@@ -34,7 +33,7 @@ export default function SettingsModal({
   ];
 
   return (
-    <Modal>
+    <Modal handleClose={handleCloseModal}>
       <div className="bg-gray-800 border-2 border-[var(--neon-color)] neon-box rounded-lg p-8 w-full max-w-md">
         <h2 className="text-3xl font-orbitron mb-6 text-center neon-text">
           Settings
