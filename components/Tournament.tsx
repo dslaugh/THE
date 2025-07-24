@@ -17,8 +17,8 @@ export default function Tournament({
   schedules,
   startingScheduleIndex,
 }: TournamentProps) {
-  const [currentSchedule, setCurrentSchedule] = useState<ScheduleItem[]>(
-    schedules[startingScheduleIndex].schedule
+  const [currentSchedule, setCurrentSchedule] = useState<Schedule>(
+    schedules[startingScheduleIndex]
   );
   const [newScheduleBuilder, setNewScheduleBuilder] = useState([]);
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
@@ -59,7 +59,7 @@ export default function Tournament({
     } else {
       // Time for the current round is up
       playSound(audioCtx, 'end');
-      if (currentRoundIndex < currentSchedule.length - 1) {
+      if (currentRoundIndex < currentSchedule.schedule.length - 1) {
         // It's not the last round, so move to the next one.
         setCurrentRoundIndex((prevRoundIndex) => prevRoundIndex + 1);
       } else {
@@ -75,9 +75,9 @@ export default function Tournament({
   }, [timeLeft]);
 
   function updateUIForRound() {
-    if (!currentSchedule || !currentSchedule.length) return;
+    if (!currentSchedule || !currentSchedule.schedule.length) return;
 
-    const round = currentSchedule[currentRoundIndex];
+    const round = currentSchedule.schedule[currentRoundIndex];
     if (!round) return;
 
     setTimeLeft(round.duration);
@@ -86,10 +86,10 @@ export default function Tournament({
     updateTimerDisplay();
 
     setCurrentBlindsStr(`${round.smallBlind} / ${round.bigBlind}`);
-    setCurrentRoundStr(`${round.round} / ${currentSchedule.length}`);
+    setCurrentRoundStr(`${round.round} / ${currentSchedule.schedule.length}`);
 
-    if (currentRoundIndex + 1 < currentSchedule.length) {
-      const nextRound = currentSchedule[currentRoundIndex + 1];
+    if (currentRoundIndex + 1 < currentSchedule.schedule.length) {
+      const nextRound = currentSchedule.schedule[currentRoundIndex + 1];
       setNextBlindsStr(`${nextRound.smallBlind} / ${nextRound.bigBlind}`);
     } else {
       setNextBlindsStr('---');
@@ -100,7 +100,7 @@ export default function Tournament({
   function updateScheduleList() {
     // const scheduleList = document.getElementById('schedule-list');
     // scheduleList.innerHTML = '';
-    // currentSchedule.forEach((round, index) => {
+    // currentSchedule.schedule.forEach((round, index) => {
     //   const isActive = index === currentRoundIndex;
     //   const item = document.createElement('div');
     //   item.className = `p-3 rounded-lg flex justify-between items-center ${isActive ? 'bg-[var(--neon-color)] text-white' : 'bg-gray-700'}`;
@@ -155,7 +155,7 @@ export default function Tournament({
   }
 
   function moveToNextRound() {
-    if (currentRoundIndex < currentSchedule.length - 1) {
+    if (currentRoundIndex < currentSchedule.schedule.length - 1) {
       setCurrentRoundIndex((currentRoundIndex) => currentRoundIndex + 1);
     }
   }
@@ -167,8 +167,8 @@ export default function Tournament({
   function resetCurrentRound() {
     pauseTimer();
     setStartBtnText('Start');
-    if (currentSchedule[currentRoundIndex]) {
-      setTimeLeft(currentSchedule[currentRoundIndex].duration);
+    if (currentSchedule.schedule[currentRoundIndex]) {
+      setTimeLeft(currentSchedule.schedule[currentRoundIndex].duration);
       setOneMinuteWarningSoundPlayed(false);
       updateTimerDisplay();
     }
@@ -189,7 +189,7 @@ export default function Tournament({
       console.error(`Schedule ${name} not found`);
       return;
     }
-    setCurrentSchedule(newSchedule.schedule);
+    setCurrentSchedule(newSchedule);
   }
 
   return (

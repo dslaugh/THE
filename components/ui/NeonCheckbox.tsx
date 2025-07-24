@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 
 export type CheckboxProps = ComponentProps<'input'> & {
-  label: string;
+  label?: string;
 };
 
 export default function NeonCheckbox({
@@ -13,9 +13,9 @@ export default function NeonCheckbox({
 
   return (
     <label className={cn}>
+      <div className="neon-checkbox-label">{label ?? 'Choice'}</div>
       <input type="checkbox" {...rest} />
-      <span className="neon-checkbox-box"></span>
-      <span className="neon-checkbox-label">{label}</span>
+      <div className="neon-checkbox-box"></div>
     </label>
   );
 }

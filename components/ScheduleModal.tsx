@@ -1,10 +1,10 @@
-import { ScheduleItem } from '../types';
+import { Schedule, ScheduleItem } from '../types';
 import { formatTime } from '../utils';
 import Modal from './ui/Modal';
 
 type ScheduleModalProps = {
   currentRoundIndex: number;
-  currentSchedule: ScheduleItem[];
+  currentSchedule: Schedule;
   handleCloseModal: () => void;
   handleViewSchedulesClick: () => void;
 };
@@ -15,7 +15,7 @@ export default function ScheduleModal({
   handleCloseModal,
   handleViewSchedulesClick,
 }: ScheduleModalProps) {
-  const currentRound = currentSchedule[currentRoundIndex];
+  const currentRound = currentSchedule.schedule[currentRoundIndex];
 
   return (
     <Modal handleClose={handleCloseModal}>
@@ -27,7 +27,7 @@ export default function ScheduleModal({
           id="schedule-list"
           className="flex-grow overflow-y-auto pr-4 space-y-2"
         >
-          {currentSchedule.map((item, index) => (
+          {currentSchedule.schedule.map((item, index) => (
             <CurrentScheduleItem
               key={item.round || index}
               item={item}
